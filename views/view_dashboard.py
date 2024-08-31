@@ -12,9 +12,9 @@ class DeskPost(Resource):
         json = request.json
         desk_title = json['desk_title']
         message = json['message']
-        connection = pymysql.connect(host ='localhost',user = 'root', password ='', database = 'pefa_db')
+        # connection = pymysql.connect(host ='localhost',user = 'root', password ='', database = 'pefa_db')
         
-        # connection = pymysql.connect(host='advance.mysql.pythonanywhere-services.com', user='advance',password='mediclab',database='advance$mediclab')
+        connection = pymysql.connect('Pefa.mysql.pythonanywhere-services.com', user='Pefa',password='peter1234',database='Pefa$default')
         cursor = connection.cursor()
         sql = '''insert into desk_post (desk_title, message) values(%s, %s)'''
                 
@@ -36,7 +36,7 @@ class DeskPost(Resource):
 #         desk_title = data["desk_title"] 
 #         message = data['message']
 #         # confirm_password = data["confirm_password"]    
-#         connection = pymysql.connect(host ='localhost',user = 'root', password ='', database = 'pefa_db')
+        # connection = pymysql.connect(host ='localhost',user = 'root', password ='', database = 'pefa_db')
 #         # connection = pymysql.connect(host='advance.mysql.pythonanywhere-services.com', user='advance',password='peter1234',database='advance$default')  
 #         sql = "select* from members where desk_id = %s"
 #         cursor =connection.cursor(pymysql.cursors.DictCursor)
@@ -84,11 +84,11 @@ class AdminSignup(Resource):
         response = passwordValidity(password)
         if response:
             if check_phone(phone):
-                connection = pymysql.connect(host='localhost',
-                                                user='root',
-                                                password='',
-                                                database='pefa_db')
-                # connection = pymysql.connect(host='advance.mysql.pythonanywhere-services.com', user='advance',password='mediclab',database='advance$mediclab')
+                # connection = pymysql.connect(host='localhost',
+                #                                 user='root',
+                #                                 password='',
+                #                                 database='pefa_db')
+                connection = pymysql.connect('Pefa.mysql.pythonanywhere-services.com', user='Pefa',password='peter1234',database='Pefa$default')
                 cursor = connection.cursor()
                 sql = '''insert into admin(username, email,
                 phone, password) values(%s, %s, %s, %s)'''
@@ -120,11 +120,11 @@ class AdminSignin(Resource):
         password = json['password']
 
         sql = "select * from admin where username = %s"
-        connection = pymysql.connect(host='localhost',
-                                                user='root',
-                                                password='',
-                                                database='pefa_db')
-        # connection = pymysql.connect(host='advance.mysql.pythonanywhere-services.com', user='advance',password='mediclab',database='advance$mediclab')
+        # connection = pymysql.connect(host='localhost',
+        #                                         user='root',
+        #                                         password='',
+        #                                         database='pefa_db')
+        connection = pymysql.connect('Pefa.mysql.pythonanywhere-services.com', user='Pefa',password='peter1234',database='Pefa$default')
           
         cursor = connection.cursor(pymysql.cursors.DictCursor)
         cursor.execute(sql, username)
@@ -153,11 +153,11 @@ class AdminProfile(Resource):
           json = request.json
           admin_id = json['admin_id']
           sql = "select * from admin where admin_id = %s"
-          connection = pymysql.connect(host='localhost',
-                                                user='root',
-                                                password='',
-                                                database='pefa_db')
-        #   connection = pymysql.connect(host='advance.mysql.pythonanywhere-services.com', user='advance',password='mediclab',database='advance$mediclab')
+        #   connection = pymysql.connect(host='localhost',
+        #                                         user='root',
+        #                                         password='',
+        #                                         database='pefa_db')
+          connection = pymysql.connect('Pefa.mysql.pythonanywhere-services.com', user='Pefa',password='peter1234',database='Pefa$default')
           
           cursor = connection.cursor(pymysql.cursors.DictCursor)
           cursor.execute(sql, admin_id)

@@ -34,8 +34,8 @@ class MemberSignup(Resource):
         response = passwordValidity(password)
         if response == True:
             # connect to DB
-            connection = pymysql.connect(host ='localhost',user = 'root', password ='', database = 'pefa_db')
-            # connection = pymysql.connect(host='advance.mysql.pythonanywhere-services.com', user='advance',password='peter1234',database='advance$default')
+            # connection = pymysql.connect(host ='localhost',user = 'root', password ='', database = 'pefa_db')
+            connection = pymysql.connect('Pefa.mysql.pythonanywhere-services.com', user='Pefa',password='peter1234',database='Pefa$default')
             cursor = connection.cursor()
             # instert into database
             sql = "insert into members (surname, other, gender, phone, dob, status, password ) values( %s, %s, %s, %s, %s, %s,%s)"
@@ -69,8 +69,8 @@ class MemberSignin(Resource):
         phone = normalize_phone(phone)
 
         # connect to db
-        # connection = pymysql.connect(host='advance.mysql.pythonanywhere-services.com', user='advance',password='peter1234',database='advance$default')
-        connection = pymysql.connect(host ='localhost',user = 'root', password ='', database = 'pefa_db')
+        connection = pymysql.connect('Pefa.mysql.pythonanywhere-services.com', user='Pefa',password='peter1234',database='Pefa$default')
+        # connection = pymysql.connect(host ='localhost',user = 'root', password ='', database = 'pefa_db')
         # check if phone exist
         sql = "select* from members where phone =%s"
         cursor =connection.cursor(pymysql.cursors.DictCursor)
@@ -102,9 +102,9 @@ class MemberProfile(Resource):
     def post(self):
         data = request.json
         member_id = data["member_id"]
-        connection = pymysql.connect(host ='localhost',user = 'root', password ='', database = 'pefa_db')
+        # connection = pymysql.connect(host ='localhost',user = 'root', password ='', database = 'pefa_db')
         # connect to DB
-        # connection = pymysql.connect(host='advance.mysql.pythonanywhere-services.com', user='advance',password='peter1234',database='advance$default')
+        connection = pymysql.connect('Pefa.mysql.pythonanywhere-services.com', user='Pefa',password='peter1234',database='Pefa$default')
         
         sql = "SELECT * FROM members WHERE member_id = %s"
         cursor  = connection.cursor(pymysql.cursors.DictCursor)
@@ -126,8 +126,8 @@ class ChangePassword(Resource):
         current_password = data["current_password"] 
         new_password = data['new_password']
         confirm_password = data["confirm_password"]    
-        connection = pymysql.connect(host ='localhost',user = 'root', password ='', database = 'pefa_db')
-        # connection = pymysql.connect(host='advance.mysql.pythonanywhere-services.com', user='advance',password='peter1234',database='advance$default')  
+        # connection = pymysql.connect(host ='localhost',user = 'root', password ='', database = 'pefa_db')
+        connection = pymysql.connect('Pefa.mysql.pythonanywhere-services.com', user='Pefa',password='peter1234',database='Pefa$default')  
         sql = "select* from members where member_id = %s"
         cursor =connection.cursor(pymysql.cursors.DictCursor)
         cursor.execute(sql, member_id)
@@ -165,8 +165,8 @@ class ChangePassword(Resource):
 
 class About(Resource):
     def get(self):
-        
-        connection = pymysql.connect(host ='localhost',user = 'root', password ='', database = 'pefa_db')
+        connection = pymysql.connect('Pefa.mysql.pythonanywhere-services.com', user='Pefa',password='peter1234',database='Pefa$default')
+        # connection = pymysql.connect(host ='localhost',user = 'root', password ='', database = 'pefa_db')
         sql = "select* from aboutchurch "  
         cursor = connection.cursor(pymysql.cursors.DictCursor)
         cursor.execute(sql)
@@ -181,8 +181,8 @@ class About(Resource):
 
 class Elders(Resource):
     def get(self):
-        
-        connection = pymysql.connect(host ='localhost',user = 'root', password ='', database = 'pefa_db')
+        connection = pymysql.connect('Pefa.mysql.pythonanywhere-services.com', user='Pefa',password='peter1234',database='Pefa$default')
+        # connection = pymysql.connect(host ='localhost',user = 'root', password ='', database = 'pefa_db')
         sql = "select* from elders "  
         cursor = connection.cursor(pymysql.cursors.DictCursor)
         cursor.execute(sql)
