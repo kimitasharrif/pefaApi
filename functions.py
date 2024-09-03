@@ -211,8 +211,8 @@ def passwordValidity(password):
     elif not re.search("[a-z]", password):
         return "You must have at least a small letter"
 
-    elif not re.search("[@#$%^&!?]", password):
-        return "You must have at least a symbol" 
+    # elif not re.search("[@#$%^&!?]", password):
+    #     return "You must have at least a symbol" 
     
     else:
         return True
@@ -247,24 +247,6 @@ def check_phone(phone):
     # If no pattern matches
     print("Phone Not Ok")
     return False   
-# def check_phone(phone):
-#     # Define regex patterns for different phone formats
-#     patterns = [
-#         r"^\+254\d{9}$",  # +254XXXXXXXXX
-#         r"^254\d{9}$",    # 254XXXXXXXXX
-#         r"^07\d{8}$"  ,     # 0XXXXXXXXX
-#          r"^01\d{7}$"       # 0XXXXXXXXX
-#     ]
-    
-#     # Check if phone matches any of the patterns
-#     for pattern in patterns:
-#         if re.match(pattern, phone):
-#             print("Phone Ok")
-#             return True
-    
-#     # If no pattern matches
-#     print("Phone Not Ok")
-#     return False
 
 # Example usage:
 # print(check_phone("+254712345678"))  # Phone Ok

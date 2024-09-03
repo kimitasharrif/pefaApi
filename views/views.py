@@ -14,7 +14,7 @@ class MemberSignup(Resource):
         # get data from client
         data = request.json
         surname= data["surname"]
-        other= data["other"]
+        others= data["others"]
         gender= data["gender"]
         phone= data["phone"]
         dob= data["dob"]
@@ -38,12 +38,12 @@ class MemberSignup(Resource):
             connection = pymysql.connect('Pefa.mysql.pythonanywhere-services.com', user='Pefa',password='peter1234',database='Pefa$default')
             cursor = connection.cursor()
             # instert into database
-            sql = "insert into members (surname, other, gender, phone, dob, status, password ) values( %s, %s, %s, %s, %s, %s,%s)"
-            data = (surname, other, gender, phone, dob, status, hash_password(password))
+            sql = "insert into members (surname, others, gender, phone, dob, status, password ) values( %s, %s, %s, %s, %s, %s,%s)"
+            data = (surname, others, gender, phone, dob, status, hash_password(password))
             try:
                 cursor.execute(sql, data)
                 connection.commit( )
-                send_sms(phone, "Registration successful")
+                send_sms(phone, "Registration successful.Thanks joining PEFA")
                 return jsonify({ "message": "REGISTER SUCCESSFUL. Thanks joining PEFA" })
 
             except:
@@ -175,7 +175,23 @@ class About(Resource):
             return jsonify({'message': 'No  church details'})
         else:
             about = cursor.fetchall()
-            return jsonify(about)          
+            return jsonify(about) 
+
+
+
+class DeskPost(Resource):
+    def get(self):
+        connection = pymysql.connect('Pefa.mysql.pythonanywhere-services.com', user='Pefa',password='peter1234',database='Pefa$default')
+        # connection = pymysql.connect(host ='localhost',user = 'root', password ='', database = 'pefa_db')
+        sql = "select* from desk_post "  
+        cursor = connection.cursor(pymysql.cursors.DictCursor)
+        cursor.execute(sql)
+        count = cursor.rowcount
+        if count == 0:
+            return jsonify({'message': 'No  updates posted'})
+        else:
+            deskpost = cursor.fetchall()
+            return jsonify(deskpost)                  
         
 
 
@@ -192,6 +208,21 @@ class Elders(Resource):
         else:
             elder = cursor.fetchall()
             return jsonify(elder)                  
+
+
+class Pastors(Resource):
+    def get(self):
+        connection = pymysql.connect('Pefa.mysql.pythonanywhere-services.com', user='Pefa',password='peter1234',database='Pefa$default')
+        # connection = pymysql.connect(host ='localhost',user = 'root', password ='', database = 'pefa_db')
+        sql = "select* from pastor "  
+        cursor = connection.cursor(pymysql.cursors.DictCursor)
+        cursor.execute(sql)
+        count = cursor.rowcount
+        if count == 0:
+            return jsonify({'message': 'No pastor found'})
+        else:
+            pastor = cursor.fetchall()
+            return jsonify(pastor)                  
 
 
 
